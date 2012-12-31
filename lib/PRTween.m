@@ -582,11 +582,9 @@ complete:
 	{
 		if ( [operation boundObject] == [object boundObject] && [operation target] == [object target] && [operation boundGetter] == [object boundGetter] && [operation boundSetter] == [object boundSetter] )
 		{
-			NSLog(@"removing op %@ for boundObject %@", object, [object boundObject] );
 			[self removeTweenOperation:object];
 		}
 	}
-	NSLog(@"adding op %@ for boundObject %@", operation, [operation boundObject] );
     [tweenOperations addObject:operation];
     return operation;
 }
