@@ -144,6 +144,9 @@
 @synthesize completeBlock;
 #endif
 
+
+
+
 @end
 
 @implementation PRTweenCGPointLerp
@@ -574,6 +577,16 @@ static NSArray *animationSelectorsForUIView = nil;
     }
     
 complete:
+	// remove existing operations for the same target/getter/setter combo
+	for ( PRTweenOperation* object in tweenOperations )
+	{
+		if ( [operation boundObject] == [object boundObject] && [operation target] == [object target] && [operation boundGetter] == [object boundGetter] && [operation boundSetter] == [object boundSetter] )
+		{
+			NSLog(@"removing op %@ for boundObject %@", object, [object boundObject] );
+			[self removeTweenOperation:object];
+		}
+	}
+	NSLog(@"adding op %@ for boundObject %@", operation, [operation boundObject] );
     [tweenOperations addObject:operation];
     return operation;
 }
@@ -619,7 +632,8 @@ complete:
 - (void)removeTweenOperation:(PRTweenOperation *)tweenOperation {
     if (tweenOperation != nil) {
         if ([tweenOperations containsObject:tweenOperation]) {
-            [expiredTweenOperations addObject:tweenOperation];
+			if ( ![expiredTweenOperations containsObject:tweenOperation] )
+				[expiredTweenOperations addObject:tweenOperation];
         }
     }
 }
