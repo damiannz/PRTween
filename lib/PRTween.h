@@ -25,22 +25,17 @@ typedef void (^PRTweenCompleteBlock)();
 
 @protocol PRTweenLerpPeriod
 
++ (id)periodWithStartValue:(NSValue*)aStartValue endValue:(NSValue*)anEndValue duration:(CGFloat)duration;
 - (NSValue*)tweenedValueForProgress:(CGFloat)progress;
 - (void)setProgress:(CGFloat)progress;
 
 @end
 
-@interface PRTweenLerpPeriod : PRTweenPeriod {
-    NSValue *startLerp;
-    NSValue *endLerp;
-    NSValue *tweenedLerp;
-}
+@interface PRTweenLerpPeriod : PRTweenPeriod
 
 @property (nonatomic, copy) NSValue *startLerp;
 @property (nonatomic, copy) NSValue *endLerp;
 @property (nonatomic, copy) NSValue *tweenedLerp;
-
-+ (id)periodWithStartValue:(NSValue*)aStartValue endValue:(NSValue*)anEndValue duration:(CGFloat)duration;
 
 @end
 
@@ -65,27 +60,7 @@ typedef void (^PRTweenCompleteBlock)();
 - (CGSize)endCGSize;
 @end
 
-@interface PRTweenOperation : NSObject {
-    PRTweenPeriod *period;
-    NSObject *target;
-    SEL updateSelector;
-    SEL completeSelector;
-    PRTweenTimingFunction timingFunction;
-    
-    CGFloat *boundRef;
-    SEL boundGetter;
-    SEL boundSetter;
-    
-    BOOL override;
-    
-#if NS_BLOCKS_AVAILABLE
-    PRTweenUpdateBlock updateBlock;
-    PRTweenCompleteBlock completeBlock; 
-#endif
-    
-    @private
-    BOOL canUseBuiltAnimation;
-}
+@interface PRTweenOperation : NSObject 
 
 @property (nonatomic, strong) PRTweenPeriod *period;
 @property (nonatomic, strong) NSObject *target;
@@ -140,10 +115,6 @@ typedef void (^PRTweenCompleteBlock)();
     NSMutableArray *tweenOperations;
     NSMutableArray *expiredTweenOperations;
     NSTimer *timer;
-    CGFloat timeOffset;
-    
-    PRTweenTimingFunction defaultTimingFunction;
-    BOOL useBuiltInAnimationsWhenPossible;
 }
 
 @property (nonatomic, readonly) CGFloat timeOffset;

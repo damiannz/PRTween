@@ -4,12 +4,6 @@
 #define kPRTweenFramerate 1.0/60
 
 @implementation PRTweenPeriod
-@synthesize startValue;
-@synthesize endValue;
-@synthesize tweenedValue;
-@synthesize duration;
-@synthesize delay;
-@synthesize startOffset;
 
 + (id)periodWithStartValue:(CGFloat)aStartValue endValue:(CGFloat)anEndValue duration:(CGFloat)duration {
     PRTweenPeriod *period = [PRTweenPeriod new];
@@ -25,9 +19,7 @@
 @end
 
 @implementation PRTweenLerpPeriod
-@synthesize startLerp;
-@synthesize endLerp;
-@synthesize tweenedLerp;
+
 
 + (id)periodWithStartValue:(NSValue*)aStartValue endValue:(NSValue*)anEndValue duration:(CGFloat)duration {
     PRTweenLerpPeriod *period = [[self class] new];
@@ -127,25 +119,6 @@
 @end
 
 @implementation PRTweenOperation
-@synthesize period;
-@synthesize target;
-@synthesize updateSelector;
-@synthesize completeSelector;
-@synthesize timingFunction;
-@synthesize boundRef;
-@synthesize boundObject;
-@synthesize boundGetter;
-@synthesize boundSetter;
-@synthesize canUseBuiltAnimation;
-@synthesize override;
-
-#if NS_BLOCKS_AVAILABLE
-@synthesize updateBlock;
-@synthesize completeBlock;
-#endif
-
-
-
 
 @end
 
